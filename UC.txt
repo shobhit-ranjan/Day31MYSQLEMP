@@ -1,0 +1,231 @@
+UC ONE
+
+
+
+mysql> create database EMP_PAYROLL;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| emp_payroll        |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.05 sec)
+
+mysql> use emp_payroll;
+Database changed
+
+
+
+
+UC TWO
+
+
+mysql> create Table employee_payroll(empid int(20),empname varchar(80),empsalary int(30),dateofjoin date);
+Query OK, 0 rows affected, 2 warnings (0.09 sec)
+
+mysql> show Tables;
++-----------------------+
+| Tables_in_emp_payroll |
++-----------------------+
+| employee_payroll      |
++-----------------------+
+1 row in set (0.03 sec)
+
+mysql> describe employee_payroll;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| empid      | int         | YES  |     | NULL    |       |
+| empname    | varchar(80) | YES  |     | NULL    |       |
+| empsalary  | int         | YES  |     | NULL    |       |
+| dateofjoin | date        | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+
+
+
+UC THREE
+
+
+
+mysql> INSERT INTO employee_payroll VALUES('001','Shobhit Ranjan','76000','2022-11-10');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO employee_payroll VALUES('001','Shubham Verma','71000','2012-2-1');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO employee_payroll VALUES('003','Shubham Singh','12000','2012-3-1');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO employee_payroll VALUES('004','Ram Singh','12300','2012-1-1');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO employee_payroll VALUES('007','Himashu Singh','1300','2011-1-1');
+Query OK, 1 row affected (0.01 sec)
+
+
+
+
+UC FOUR
+
+
+
+
+mysql> SELECT * FROM employee_payroll;
++-------+----------------+-----------+------------+
+| empid | empname        | empsalary | dateofjoin |
++-------+----------------+-----------+------------+
+|     1 | Shobhit Ranjan |     76000 | 2022-11-10 |
+|     1 | Shubham Verma  |     71000 | 2012-02-01 |
+|     3 | Shubham Singh  |     12000 | 2012-03-01 |
+|     4 | Ram Singh      |     12300 | 2012-01-01 |
+|     7 | Himashu Singh  |      1300 | 2011-01-01 |
++-------+----------------+-----------+------------+
+5 rows in set (0.01 sec)
+
+
+
+UC FIVE
+
+
+
+mysql> SELECT empsalary FROM employee_payroll WHERE empname = 'Shobhit Ranjan';
++-----------+
+| empsalary |
++-----------+
+|     76000 |
++-----------+
+1 row in set (0.00 sec)
+
+
+
+
+UC SIX
+
+
+
+
+mysql> SELECT * FROM employee_payroll;
++-------+----------------+-----------+------------+
+| empid | empname        | empsalary | dateofjoin |
++-------+----------------+-----------+------------+
+|     1 | Shobhit Ranjan |     76000 | 2022-11-10 |
+|     1 | Shubham Verma  |     71000 | 2012-02-01 |
+|     3 | Shubham Singh  |     12000 | 2012-03-01 |
+|     4 | Ram Singh      |     12300 | 2012-01-01 |
+|     7 | Himashu Singh  |      1300 | 2011-01-01 |
++-------+----------------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> ALTER TABLE employee_payroll ADD COLUMN fathername char(10);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM employee_payroll;
++-------+----------------+-----------+------------+------------+
+| empid | empname        | empsalary | dateofjoin | fathername |
++-------+----------------+-----------+------------+------------+
+|     1 | Shobhit Ranjan |     76000 | 2022-11-10 | NULL       |
+|     1 | Shubham Verma  |     71000 | 2012-02-01 | NULL       |
+|     3 | Shubham Singh  |     12000 | 2012-03-01 | NULL       |
+|     4 | Ram Singh      |     12300 | 2012-01-01 | NULL       |
+|     7 | Himashu Singh  |      1300 | 2011-01-01 | NULL       |
++-------+----------------+-----------+------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> ALTER TABLE employee_payroll ADD COLUMN Gender char(10);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM employee_payroll;
++-------+----------------+-----------+------------+------------+--------+
+| empid | empname        | empsalary | dateofjoin | fathername | Gender |
++-------+----------------+-----------+------------+------------+--------+
+|     1 | Shobhit Ranjan |     76000 | 2022-11-10 | NULL       | NULL   |
+|     1 | Shubham Verma  |     71000 | 2012-02-01 | NULL       | NULL   |
+|     3 | Shubham Singh  |     12000 | 2012-03-01 | NULL       | NULL   |
+|     4 | Ram Singh      |     12300 | 2012-01-01 | NULL       | NULL   |
+|     7 | Himashu Singh  |      1300 | 2011-01-01 | NULL       | NULL   |
++-------+----------------+-----------+------------+------------+--------+
+5 rows in set (0.00 sec)
+
+
+mysql> UPDATE employee_payroll SET Gender ='Male' WHERE empname = 'Shobhit Ranjan' OR empname = 'Ram Singh';
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> UPDATE employee_payroll SET Gender = 'male' WHERE empsalary = '1300';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM employee_payroll;
++-------+----------------+-----------+------------+------------+--------+
+| empid | empname        | empsalary | dateofjoin | fathername | Gender |
++-------+----------------+-----------+------------+------------+--------+
+|     1 | Shobhit Ranjan |     76000 | 2022-11-10 | NULL       | Male   |
+|     1 | Shubham Verma  |     71000 | 2012-02-01 | NULL       | NULL   |
+|     3 | Shubham Singh  |     12000 | 2012-03-01 | NULL       | NULL   |
+|     4 | Ram Singh      |     12300 | 2012-01-01 | NULL       | Male   |
+|     7 | Himashu Singh  |      1300 | 2011-01-01 | NULL       | male   |
++-------+----------------+-----------+------------+------------+--------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+UC SEVEN
+
+
+
+mysql> SELECT MIN(empsalary) FROM employee_payroll WHERE gender = 'Male';
++----------------+
+| MIN(empsalary) |
++----------------+
+|           1300 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(empsalary) FROM employee_payroll WHERE gender = 'Male';
++----------------+
+| SUM(empsalary) |
++----------------+
+|          89600 |
++----------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT AVG(empsalary) FROM employee_payroll WHERE gender = 'Male'
+    -> ;
++----------------+
+| AVG(empsalary) |
++----------------+
+|     29866.6667 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(empsalary) FROM employee_payroll WHERE gender = 'Male';
++----------------+
+| MAX(empsalary) |
++----------------+
+|          76000 |
++----------------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
